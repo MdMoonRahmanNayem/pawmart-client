@@ -16,12 +16,18 @@ import PrivateRoute from "./PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,  // IMPORTANT FIX
+    element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/pets-supplies", element: <PetsAndSupplies /> },
+
+      // ⭐ CATEGORY FILTER ROUTE
+      {
+        path: "/category-filtered-product/:categoryName",
+        element: <PetsAndSupplies />,
+      },
 
       {
         path: "/add-listing",
@@ -61,11 +67,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  // 404 Page (Navbar/Footer থাকবে না)
-  {
-    path: "*",
-    element: <PageNotFound />,
-  },
+  { path: "*", element: <PageNotFound /> },
 ]);
 
 export default router;

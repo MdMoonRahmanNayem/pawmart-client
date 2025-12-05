@@ -1,8 +1,10 @@
 /* eslint-disable */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function PetsAndSupplies() {
+  const { categoryName } = useParams(); // ⭐ route থেকে category নিলাম
+
   const [listings, setListings] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
@@ -15,9 +17,14 @@ export default function PetsAndSupplies() {
       .then((data) => {
         setListings(data);
         setFiltered(data);
+
+        // ⭐ যদি route এ category থাকে, অটোমেটিক filter হবে
+        if (categoryName) {
+          setCategory(categoryName);
+        }
       })
       .catch(() => {});
-  }, []);
+  }, [categoryName]);
 
   // FILTER FUNCTION
   const applyFilters = () => {
@@ -36,7 +43,6 @@ export default function PetsAndSupplies() {
     setFiltered(result);
   };
 
-  // APPLY FILTER ON CHANGE
   useEffect(() => {
     applyFilters();
   }, [search, category]);
@@ -44,73 +50,60 @@ export default function PetsAndSupplies() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
 
-      {/* 🔍 FILTER BAR */}
+      {/* FILTER BAR */}
       <div className="flex flex-col sm:flex-row justify-between gap-4 mb-8">
 
-        {/* Search */}
         <input
           type="text"
           placeholder="Search by pet or product name..."
-          className="w-full sm:w-1/2 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
+          className="w-full sm:w-1/2 px-4 py-2 border rounded-md"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {/* Category Filter */}
         <select
-          className="w-full sm:w-1/4 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
+          className="w-full sm:w-1/4 px-4 py-2 border rounded-md"
+          value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">All Categories</option>
           <option value="Pets">Pets (Adoption)</option>
           <option value="Food">Pet Food</option>
           <option value="Accessories">Accessories</option>
-          <option value="Care Products">Care Products</option>
+          <option value="Care">Care Products</option>
         </select>
       </div>
 
-      {/* 🐾 TITLE */}
-      <h2 className="text-3xl font-bold mb-6 text-center">Available Pets & Products</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">
+        {categoryName ? `Category: ${categoryName}` : "Available Pets & Products"}
+      </h2>
 
-      {/* GRID VIEW */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
         {filtered.length === 0 ? (
-          <p className="col-span-3 text-center text-gray-500">
-            No matching items found.
-          </p>
+          <p className="col-span-3 text-center text-gray-500">No matching items found.</p>
         ) : (
           filtered.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white shadow rounded-lg p-4 space-y-3 hover:shadow-lg transition"
-            >
-              <img
-                src={item.image}
-                className="w-full h-48 object-cover rounded"
-                alt={item.name}
-              />
-              <h3 className="font-bold text-xl">{item.name}</h3>
-              <p className="text-gray-600">{item.category}</p>
-              <p className="text-gray-700 font-medium">{item.location}</p>
+            <div key={item._id} className="bg-white shadow rounded-lg p-4">
+              <img src={item.image} className="w-full h-48 object-cover rounded" />
+              <h3 className="text-xl font-bold">{item.name}</h3>
+              <p>{item.category}</p>
+              <p className="text-gray-700">{item.location}</p>
 
               <p className="font-semibold">
-                {item.price === 0 ? (
-                  <span className="text-green-600">Free for Adoption</span>
-                ) : (
-                  <span>${item.price}</span>
-                )}
+                {item.price === 0 ? "Free for Adoption" : `$${item.price}`}
               </p>
 
               <Link
                 to={`/listing/${item._id}`}
-                className="block bg-teal-600 text-white text-center py-2 rounded-md hover:bg-teal-700 transition"
+                className="block mt-2 bg-teal-600 text-white text-center py-2 rounded"
               >
                 See Details
               </Link>
             </div>
           ))
         )}
+
       </div>
     </div>
   );
