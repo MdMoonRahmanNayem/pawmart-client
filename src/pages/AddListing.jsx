@@ -1,157 +1,67 @@
 /* eslint-disable */
-import { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function AddListing() {
   const { user } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleAddListing = async (e) => {
+  const handleAdd = (e) => {
     e.preventDefault();
-    setLoading(true);
 
     const form = e.target;
-    const newListing = {
+    const listing = {
       name: form.name.value,
       category: form.category.value,
-      price: form.price.value,
+      price: Number(form.price.value),
       location: form.location.value,
       description: form.description.value,
-      image: form.image.value,
+      image: form.image.value,   // IMPORTANT
       date: form.date.value,
-      email: user?.email, // logged-in user email
+      email: user?.email, // auto fill
     };
 
-    try {
-      const res = await fetch("http://localhost:5000/api/listings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newListing),
-      });
-
-      const data = await res.json();
-      if (data._id) {
+    fetch("http://localhost:5000/api/listings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(listing),
+    })
+      .then((res) => res.json())
+      .then((data) => {
         toast.success("Listing Added Successfully!");
-        form.reset();
-      } else {
-        toast.error("Failed to add listing!");
-      }
-    } catch (error) {
-      toast.error("Something went wrong!");
-    } finally {
-      setLoading(false);
-    }
+        navigate("/my-listings");
+      })
+      .catch(() => toast.error("Something went wrong"));
   };
 
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-md rounded-xl p-6 sm:p-8 my-10">
-      <h2 className="text-3xl font-bold text-center mb-6">Add New Listing</h2>
+    <div className="max-w-xl mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-6 text-center">Add New Listing</h2>
 
-      <form onSubmit={handleAddListing} className="space-y-5">
+      <form onSubmit={handleAdd} className="space-y-4">
 
-        {/* Name */}
-        <div>
-          <label className="font-medium">Product/Pet Name</label>
-          <input
-            type="text"
-            name="name"
-            required
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          />
-        </div>
+        <input name="name" type="text" placeholder="Name" required className="w-full border p-2 rounded" />
 
-        {/* Category */}
-        <div>
-          <label className="font-medium">Category</label>
-          <select
-            name="category"
-            required
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          >
-            <option value="">Select Category</option>
-            <option value="Pets">Pets (Adoption)</option>
-            <option value="Food">Pet Food</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Care Products">Care Products</option>
-          </select>
-        </div>
+        <select name="category" required className="w-full border p-2 rounded">
+          <option value="Pets">Pets</option>
+          <option value="Pet Food">Pet Food</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Care Products">Care Products</option>
+        </select>
 
-        {/* Price */}
-        <div>
-          <label className="font-medium">Price (0 for pets)</label>
-          <input
-            type="number"
-            name="price"
-            required
-            min="0"
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          />
-        </div>
+        <input name="price" type="number" placeholder="Price (0 for pets)" required className="w-full border p-2 rounded" />
 
-        {/* Location */}
-        <div>
-          <label className="font-medium">Location</label>
-          <input
-            type="text"
-            name="location"
-            required
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          />
-        </div>
+        <input name="location" type="text" placeholder="Location" required className="w-full border p-2 rounded" />
 
-        {/* Description */}
-        <div>
-          <label className="font-medium">Description</label>
-          <textarea
-            name="description"
-            required
-            rows="4"
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          ></textarea>
-        </div>
+        <input name="image" type="text" placeholder="Image URL" required className="w-full border p-2 rounded" />
 
-        {/* Image */}
-        <div>
-          <label className="font-medium">Image URL</label>
-          <input
-            type="text"
-            name="image"
-            required
-            placeholder="https://example.com/image.jpg"
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          />
-        </div>
+        <input name="date" type="date" required className="w-full border p-2 rounded" />
 
-        {/* Date */}
-        <div>
-          <label className="font-medium">Available Date</label>
-          <input
-            type="date"
-            name="date"
-            required
-            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-500"
-          />
-        </div>
+        <textarea name="description" placeholder="Description" required className="w-full border p-2 rounded" />
 
-        {/* Email */}
-        <div>
-          <label className="font-medium">Your Email</label>
-          <input
-            type="email"
-            value={user?.email}
-            readOnly
-            className="w-full mt-1 px-4 py-2 border rounded-md bg-gray-100"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-2 bg-teal-600 text-white rounded-md font-semibold hover:bg-teal-700 transition"
-        >
-          {loading ? "Adding..." : "Add Listing"}
+        <button className="bg-teal-600 text-white w-full py-2 rounded">
+          Add Listing
         </button>
       </form>
     </div>

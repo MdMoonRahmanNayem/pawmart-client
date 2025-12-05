@@ -15,7 +15,7 @@ export default function MyListings() {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/api/listings?email=${user.email}`)
+    fetch(`http://localhost:5000/api/listings/my?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setListings(data))
       .catch(() => {});
