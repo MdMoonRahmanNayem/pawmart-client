@@ -1,0 +1,26 @@
+:root {
+  --pm-primary: #2b7a78;
+  --pm-secondary: #3aafa9;
+  --pm-dark: #17252a;
+  --pm-light: #def2f1;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-[var(--pm-primary)] text-white hover:bg-[var(--pm-secondary)];
+}
+
+.card {
+  @apply bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-all;
+}
+
+.section-title {
+  @apply text-3xl font-bold mb-4 text-center text-[var(--pm-dark)];
+}
