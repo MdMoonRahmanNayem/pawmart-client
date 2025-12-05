@@ -18,37 +18,71 @@ export default function MyOrders() {
   }, [user]);
 
   // -------------------------
-  // PDF DOWNLOAD FUNCTION (NO LOGO)
-  // -------------------------
-  const downloadPDF = () => {
-    const doc = new jsPDF();
+// PREMIUM COLORFUL PDF (NO LOGO)
+// -------------------------
+const downloadPDF = () => {
+  const doc = new jsPDF("p", "pt", "a4");
 
-    // ---- Title ----
-    doc.setFontSize(18);
-    doc.text("PawMart - My Orders Report", 14, 20);
+  const primary = "#009688";   // Teal
+  const light = "#e0f2f1";     // Light teal
+  const dark = "#004d40";      // Deep green text
 
-    // ---- User Info ----
-    doc.setFontSize(12);
-    doc.text(`User: ${user?.displayName || "Unknown User"}`, 14, 30);
-    doc.text(`Email: ${user?.email}`, 14, 37);
-    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 44);
+  // ===== HEADER BAR =====
+  doc.setFillColor(primary);
+  doc.rect(0, 0, 600, 60, "F");
 
-    // ---- Table ----
-    autoTable(doc, {
-      startY: 55,
-      head: [["Product Name", "Price", "Qty", "Address", "Date", "Phone"]],
-      body: orders.map((o) => [
-        o.productName,
-        `$${o.price}`,
-        o.quantity,
-        o.address,
-        o.date,
-        o.phone,
-      ]),
-    });
+  doc.setFontSize(22);
+  doc.setTextColor("#ffffff");
+  doc.text("PawMart — My Orders Report", 30, 38);
 
-    doc.save("My_Orders_Report.pdf");
-  };
+  // ===== USER INFO BOX =====
+  doc.setFillColor(light);
+  doc.roundedRect(20, 80, 560, 70, 6, 6, "F");
+
+  doc.setFontSize(12);
+  doc.setTextColor(dark);
+  doc.text(`User: ${user?.displayName || "Unknown User"}`, 35, 105);
+  doc.text(`Email: ${user?.email}`, 35, 125);
+  doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 35, 145);
+
+  // ===== TABLE =====
+  autoTable(doc, {
+    startY: 170,
+    headStyles: {
+      fillColor: primary,
+      textColor: "white",
+      fontSize: 11,
+      halign: "center",
+    },
+    bodyStyles: {
+      textColor: dark,
+    },
+    alternateRowStyles: {
+      fillColor: light,
+    },
+    head: [["Product Name", "Price", "Qty", "Address", "Date", "Phone"]],
+    body: orders.map((o) => [
+      o.productName,
+      `$${o.price}`,
+      o.quantity,
+      o.address,
+      o.date,
+      o.phone,
+    ]),
+  });
+
+  // ===== FOOTER =====
+  doc.setFontSize(10);
+  doc.setTextColor("#555");
+  doc.text(
+    "PawMart — Auto-generated order report",
+    30,
+    doc.internal.pageSize.height - 20
+  );
+
+  doc.save("PawMart_My_Orders.pdf");
+};
+
 
   return (
     <div className="max-w-5xl mx-auto p-6">
