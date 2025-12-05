@@ -71,7 +71,7 @@ export default function Home() {
     </Link>
 
     {/* Pet Food */}
-    <Link to="/category-filtered-product/Food" className="bg-white shadow hover:shadow-lg rounded-lg overflow-hidden cursor-pointer group">
+    <Link to="/category-filtered-product/Pet Food" className="bg-white shadow hover:shadow-lg rounded-lg overflow-hidden cursor-pointer group">
       <img src="/images/food.avif" className="h-36 w-full object-cover group-hover:scale-105 transition" />
       <div className="p-4 text-center"><h3 className="text-lg font-semibold">Pet Food</h3></div>
     </Link>
@@ -83,7 +83,7 @@ export default function Home() {
     </Link>
 
     {/* Care Products */}
-    <Link to="/category-filtered-product/Care" className="bg-white shadow hover:shadow-lg rounded-lg overflow-hidden cursor-pointer group">
+    <Link to="/category-filtered-product/Care Products" className="bg-white shadow hover:shadow-lg rounded-lg overflow-hidden cursor-pointer group">
       <img src="/images/care.jpg" className="h-36 w-full object-cover group-hover:scale-105 transition" />
       <div className="p-4 text-center"><h3 className="text-lg font-semibold">Care Products</h3></div>
     </Link>

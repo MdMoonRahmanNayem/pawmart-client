@@ -10,6 +10,7 @@ import ListingDetails from "../pages/ListingDetails";
 import MyListings from "../pages/MyListings";
 import MyOrders from "../pages/MyOrders";
 import PageNotFound from "../pages/PageNotFound";
+import CategoryFilteredPage from "../pages/CategoryFilteredPage";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/pets-supplies", element: <PetsAndSupplies /> },
+      {
+  path: "/category-filtered-product/:categoryName",
+  element: <CategoryFilteredPage />,
+},
 
       // ⭐ CATEGORY FILTER ROUTE
       {
