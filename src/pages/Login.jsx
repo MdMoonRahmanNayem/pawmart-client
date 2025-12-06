@@ -73,7 +73,7 @@ export default function Login() {
           }}
           className="w-full mt-4 py-2 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition"
         >
-          <img src="https://i.postimg.cc/0j1YzWjd/google.png" className="w-5" />
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5" />
           Continue with Google
         </button>
 
@@ -81,7 +81,7 @@ export default function Login() {
         <p className="text-center mt-4 text-sm">
           Don’t have an account?
           <Link to="/register" className="text-teal-600 ml-1 font-semibold hover:underline">
-            Signup
+            Register
           </Link>
         </p>
       </div>

@@ -9,7 +9,7 @@ export default function Home() {
   const [recentListings, setRecentListings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/listings?limit=6") // আপনার API অনুযায়ী URL ঠিক করবেন
+    fetch("http://localhost:5000/api/listings?limit=6")
       .then((res) => res.json())
       .then((data) => setRecentListings(data))
       .catch(() => {});
@@ -106,11 +106,11 @@ export default function Home() {
                 key={item._id}
                 className="bg-white shadow rounded-lg p-4 space-y-3"
               >
-               <img
-  src={`http://localhost:5000/uploads/${item.image}`}
+               <img 
+  src={item.image.startsWith("http") ? item.image : `http://localhost:5000/uploads/${item.image}`}
   className="w-full h-48 object-cover rounded"
-  alt=""
 />
+
 
 
 
