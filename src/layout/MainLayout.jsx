@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 export default function MainLayout() {
   const { pathname } = useLocation();
 
-  // 404 page এ Navbar & Footer দেখাবে না
   const isNotFound = pathname === "/404";
 
   return (

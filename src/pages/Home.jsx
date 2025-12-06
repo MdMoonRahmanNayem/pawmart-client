@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="space-y-16">
 
-      {/* 1️⃣ BANNER SECTION */}
+      {/* BANNER SECTION */}
       <div className="mt-4">
         <Swiper
           autoplay={{ delay: 2500 }}
@@ -92,7 +92,7 @@ export default function Home() {
 </section>
 
 
-      {/* 3️⃣ RECENT LISTINGS */}
+      {/* RECENT LISTINGS */}
       <section>
         <h2 className="text-3xl font-semibold text-center mb-8">Recent Listings</h2>
 
@@ -133,7 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4️⃣ EXTRA SECTION — WHY ADOPT */}
+      {/* EXTRA SECTION — WHY ADOPT */}
       <section className="bg-[#f1f8f8] p-8 rounded-xl">
         <h2 className="text-3xl font-semibold text-center mb-6">Why Adopt from PawMart?</h2>
         <p className="text-center text-lg text-slate-700 max-w-3xl mx-auto">
@@ -143,7 +143,7 @@ export default function Home() {
         </p>
       </section>
 
-      {/* 5️⃣ EXTRA SECTION — PET HEROES */}
+      {/* EXTRA SECTION — PET HEROES */}
       <section>
         <h2 className="text-3xl font-semibold text-center mb-8">Meet Our Pet Heroes</h2>
 

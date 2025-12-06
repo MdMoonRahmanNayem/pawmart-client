@@ -17,9 +17,9 @@ export default function AddListing() {
       price: Number(form.price.value),
       location: form.location.value,
       description: form.description.value,
-      image: form.image.value,   // IMPORTANT
+      image: form.image.value, 
       date: form.date.value,
-      email: user?.email, // auto fill
+      email: user?.email,
     };
 
     fetch("http://localhost:5000/api/listings", {

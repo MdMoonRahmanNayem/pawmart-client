@@ -15,7 +15,6 @@ export default function CategoryFilteredPage() {
       .then((data) => {
         setAllListings(data);
 
-        // 🔥 EXACT MATCH FILTERING after decoding
         const result = data.filter(
           (item) =>
             item.category.toLowerCase() === decodedCategory.toLowerCase()
