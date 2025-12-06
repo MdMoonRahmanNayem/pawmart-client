@@ -70,7 +70,8 @@ export default function PetsAndSupplies() {
           <option value="Pets">Pets (Adoption)</option>
           <option value="Food">Pet Food</option>
           <option value="Accessories">Accessories</option>
-          <option value="Care">Care Products</option>
+          <option value="Pet Care Products">Pet Care Products</option>
+
         </select>
       </div>
 

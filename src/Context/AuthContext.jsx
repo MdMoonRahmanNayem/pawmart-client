@@ -1,6 +1,4 @@
 /* eslint-disable */
-
-
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   getAuth,
@@ -19,7 +17,7 @@ const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // ⭐ ADD LOADING STATE
+  const [loading, setLoading] = useState(true);
 
   // Register
   const registerUser = (email, password) => {
@@ -49,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false); // ⭐ LOADING DONE
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
