@@ -9,7 +9,7 @@ export default function Register() {
   const { user, registerUser, googleLogin } = useAuth();
   const navigate = useNavigate();
 
-  // ⭐ Already logged in → redirect home
+  // Already logged in → redirect home
   if (user) return <Navigate to="/" replace />;
 
   const handleRegister = (e) => {

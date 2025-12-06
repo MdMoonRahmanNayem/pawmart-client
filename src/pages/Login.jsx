@@ -8,7 +8,7 @@ export default function Login() {
   const { user, loginUser, googleLogin } = useAuth();
   const navigate = useNavigate();
 
-  // ⭐ Already logged in → redirect home
+  // Already logged in → redirect home
   if (user) return <Navigate to="/" replace />;
 
   const handleLogin = (e) => {

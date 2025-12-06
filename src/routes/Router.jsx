@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   element: <CategoryFilteredPage />,
 },
 
-      // ⭐ CATEGORY FILTER ROUTE
+      // CATEGORY FILTER ROUTE
       {
         path: "/category-filtered-product/:categoryName",
         element: <PetsAndSupplies />,

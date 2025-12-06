@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function PetsAndSupplies() {
-  const { categoryName } = useParams(); // ⭐ route থেকে category নিলাম
+  const { categoryName } = useParams(); 
 
   const [listings, setListings] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -18,7 +18,7 @@ export default function PetsAndSupplies() {
         setListings(data);
         setFiltered(data);
 
-        // ⭐ যদি route এ category থাকে, অটোমেটিক filter হবে
+        
         if (categoryName) {
           setCategory(categoryName);
         }

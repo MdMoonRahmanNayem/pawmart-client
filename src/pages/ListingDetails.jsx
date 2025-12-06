@@ -66,7 +66,7 @@ export default function ListingDetails() {
   );
 }
 
-/* ⭐ ORDER MODAL COMPONENT ⭐ */
+/* ORDER MODAL COMPONENT */
 function OrderModal({ listing, user, closeModal }) {
   const handleOrder = (e) => {
     e.preventDefault();
