@@ -10,7 +10,7 @@ export default function CategoryFilteredPage() {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/listings")
+    fetch("https://pawmart-server-sigma.vercel.app/api/listings")
       .then((res) => res.json())
       .then((data) => {
         setAllListings(data);
@@ -45,7 +45,8 @@ export default function CategoryFilteredPage() {
               <img
                 src={item.image.startsWith("http") 
                   ? item.image 
-                  : `http://localhost:5000/uploads/${item.image}`
+                  : `https://pawmart-server-sigma.vercel.app
+/uploads/${item.image}`
                 }
                 className="w-full h-48 object-cover rounded"
                 alt={item.name}

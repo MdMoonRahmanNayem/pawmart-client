@@ -22,7 +22,7 @@ export default function AddListing() {
       email: user?.email,
     };
 
-    fetch("http://localhost:5000/api/listings", {
+    fetch("https://pawmart-server-sigma.vercel.app/api/listings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(listing),

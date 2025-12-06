@@ -12,7 +12,7 @@ export default function PetsAndSupplies() {
 
   // LOAD ALL LISTINGS
   useEffect(() => {
-    fetch("http://localhost:5000/api/listings")
+    fetch("https://pawmart-server-sigma.vercel.app/api/listings")
       .then((res) => res.json())
       .then((data) => {
         setListings(data);

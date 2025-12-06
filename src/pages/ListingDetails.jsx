@@ -13,7 +13,8 @@ export default function ListingDetails() {
 
   // Load Single Listing by ID
   useEffect(() => {
-    fetch(`http://localhost:5000/api/listings/${id}`)
+    fetch(`https://pawmart-server-sigma.vercel.app
+/api/listings/${id}`)
       .then((res) => res.json())
       .then((data) => setListing(data))
       .catch(() => {});
@@ -84,7 +85,7 @@ function OrderModal({ listing, user, closeModal }) {
       additionalNotes: e.target.notes.value,
     };
 
-    fetch("http://localhost:5000/api/orders", {
+    fetch("https://pawmart-server-sigma.vercel.app/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),

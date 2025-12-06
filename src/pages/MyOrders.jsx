@@ -11,7 +11,8 @@ export default function MyOrders() {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/api/orders/${user.email}`)
+    fetch(`https://pawmart-server-sigma.vercel.app
+/api/orders/${user.email}`)
       .then((res) => res.json())
       .then((data) => setOrders(data))
       .catch((err) => console.log(err));

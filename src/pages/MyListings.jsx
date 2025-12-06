@@ -15,7 +15,8 @@ export default function MyListings() {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/api/listings/my?email=${user.email}`)
+    fetch(`https://pawmart-server-sigma.vercel.app
+/api/listings/my?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setListings(data))
       .catch(() => {});
@@ -25,7 +26,8 @@ export default function MyListings() {
   const handleDelete = (id) => {
     if (!confirm("Are you sure you want to delete?")) return;
 
-    fetch(`http://localhost:5000/api/listings/${id}`, {
+    fetch(`https://pawmart-server-sigma.vercel.app
+/api/listings/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -55,7 +57,8 @@ export default function MyListings() {
       image: e.target.image.value,
     };
 
-    fetch(`http://localhost:5000/api/listings/${editingItem._id}`, {
+    fetch(`https://pawmart-server-sigma.vercel.app
+/api/listings/${editingItem._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
